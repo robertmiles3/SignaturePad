@@ -383,7 +383,7 @@ namespace Xamarin.Controls
 		{
 			settings.ApplyDefaults (StrokeWidth, StrokeColor);
 
-			if (IsBlank || settings.DesiredSizeOrScale?.IsValid != true)
+			if (IsBlank || !settings.DesiredSizeOrScale.HasValue || !settings.DesiredSizeOrScale.Value.IsValid)
 			{
 				scale = default (NativeSize);
 				signatureBounds = default (NativeRect);
@@ -403,7 +403,7 @@ namespace Xamarin.Controls
 
 			signatureBounds = GetSignatureBounds ();
 
-			if (settings.ShouldCrop == true)
+			if (settings.ShouldCrop.HasValue && settings.ShouldCrop.Value)
 			{
 				if (sizeOrScale.Type == SizeOrScaleType.Size)
 				{
